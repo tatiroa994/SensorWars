@@ -6,6 +6,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { RegisterAlertComponent } from './components/register-alert/register-alert.component';
 import { SensorsComponent } from './components/sensors/sensors.component';
 import { NotificationAlertComponent } from './components/notification-alert/notification-alert.component';
+import { HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { NotificationAlertComponent } from './components/notification-alert/noti
     NotificationAlertComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
