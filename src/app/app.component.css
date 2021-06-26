@@ -1,0 +1,14 @@
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 150px 14px 0 14px;
+}
+
+app-sensors{
+  width: 60%;
+}
+
+app-register-aler{
+  width: 40%;
+}

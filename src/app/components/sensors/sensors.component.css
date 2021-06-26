@@ -1,0 +1,29 @@
+.container-principal {
+  background-color: var(--color-secondary);
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.search {
+  color: var(--color-white);
+  font-size: 1.3rem;
+}
+
+.search input{
+  color: #212121;
+  font-size: 1rem;
+  padding: 0.2rem;
+  border-radius: 5px;
+  margin-left: 1rem;
+}
+
+.container-sensors{
+  padding: 1rem;
+  
+}
+
+.sensor{
+  color: var(--color-white);
+  font-size: 1rem;
+  display: inline-block;
+}

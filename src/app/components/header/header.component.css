@@ -1,0 +1,44 @@
+.header-principal {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  background-color: var(--color-secondary);
+  padding: 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+}
+
+.sensor {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 70px;
+  color: var(--color-white);
+}
+
+.wars {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 70px;
+  color: var(--color-main);
+  -webkit-text-stroke: 1.2px var(--color-white);
+}
+
+.status-alert {
+  border-radius: 100%;
+  width: 100px;
+  height: 100px;
+  background-color: var(--blue-alert);
+  position: relative;
+}
+
+.text-alert {
+  color: var(--color-white);
+  position: absolute;
+  top: 28px;
+  font-size: 2rem;
+  left: 16px;
+}
+
+
