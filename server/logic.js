@@ -48,7 +48,7 @@ app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cors());
 
 let socket;
-io.on('connection', (s) => { socket = s; });
+io.on('connection', (s) => { console.log("Usuario conectado"); socket = s; });
 
 /**
  * Endpoint para la API
@@ -58,10 +58,14 @@ io.on('connection', (s) => { socket = s; });
 app.post("/input", (req, res) => {
     const { data } = req.body;
 
-    const info = main.processMain(data);
-    const dataBefore = main.getBefore();
+    const { alerts, graph } = main.processMain(data);
+    // const dataBefore = main.getBefore();
 
-    socket.emit("data", info);
+    if (alerts.sensors.length > 0) {
+        socket.emit("data", alerts);
+    }
+
+    socket.emit("graph", graph);
 
     return res.json();
 });
