@@ -65,7 +65,9 @@ app.post("/input", (req, res) => {
         socket.emit("data", alerts);
     }
 
-    socket.emit("graph", graph);
+    if ((graph.dangerCount + graph.inactiveCount) > 0) {
+        socket.emit("graph", graph);
+    }
 
     return res.json();
 });
