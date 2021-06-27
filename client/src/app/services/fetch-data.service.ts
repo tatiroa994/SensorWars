@@ -14,7 +14,7 @@ export class FetchDataService {
     return this.http.get(`${this.urlPrueba}info`);
   }
 
-  runGame(): Observable<any> {
-    return this.http.get(`${this.url}connect/1`);
+  runGame(value:number): Observable<any> {
+    return this.http.get(`${this.url}connect/${value}`);
   }
 }

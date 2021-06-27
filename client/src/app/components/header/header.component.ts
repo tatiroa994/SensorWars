@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FetchDataService } from 'src/app/services/fetch-data.service';
 
 @Component({
@@ -9,14 +9,13 @@ import { FetchDataService } from 'src/app/services/fetch-data.service';
 export class HeaderComponent implements OnInit {
   @Input() statusColor!: number;
 
-  constructor(private fetchData: FetchDataService) { }
+  constructor(private fetchData: FetchDataService) {}
 
-
-  runGame() {
-    this.fetchData.runGame().subscribe((data) => {
+  runGame(inputValue: number) {
+    this.fetchData.runGame(inputValue).subscribe((data) => {
       console.log({ rungame: data });
     });
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }
