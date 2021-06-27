@@ -28,6 +28,12 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
+const server = require('http').Server(app);
+const io = require('socket.io')(server, {
+    cors: {
+        origins: ['http://localhost:4200']
+    }
+});
 
 const cors = require("cors");
 const main = require("./process");
@@ -38,6 +44,9 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cors());
 
+let socket;
+io.on('connection', (s) => { socket = s; });
+
 /**
  * Endpoint para la API
  * 
@@ -47,6 +56,10 @@ app.post("/input", (req, res) => {
     const { data } = req.body;
 
     const info = main.processMain(data);
+    const dataBefore = main.getBefore();
+
+    socket.emit("data", dataBefore);
+
     return res.json({ info });
 });
 
@@ -56,10 +69,11 @@ app.post("/input", (req, res) => {
  * Para recuperar la info.
  */
 app.get("/info", (req, res) => {
-    const dataBefore = main.getBefore();
-    return res.status(200).json({ data: dataBefore });
+    return res.json();
+    // const dataBefore = main.getBefore();
+    // return res.status(200).json({ data: dataBefore });
 });
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Escuchando en *:${PORT}`);
 });
