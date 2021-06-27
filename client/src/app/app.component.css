@@ -5,10 +5,13 @@
   padding: 150px 14px 0 14px;
 }
 
-app-sensors{
+.container-chart {
+  background-color: var(--color-secondary);
+  padding: 1rem;
+  border-radius: 10px;
   width: 60%;
 }
 
-app-register-aler{
+app-register-aler {
   width: 40%;
 }

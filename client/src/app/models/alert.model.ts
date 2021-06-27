@@ -5,10 +5,14 @@ export interface Alert {
   time: Date;
 }
 
-export interface DataAlert{
+export interface DataAlert {
   ship: string;
   magto: number;
-  proximity: {count:number, type:string};
-  alert: {type:number};  
+  proximity: { count: number; type: string };
+  alert: { type: number };
 }
 
+export interface ChartALert {
+  dangerCount: number; 
+  inactiveCount: number;
+}

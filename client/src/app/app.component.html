@@ -1,6 +1,9 @@
 <app-header [statusColor]="lengthAlert"></app-header>
 <main class="main">
-  <app-sensors></app-sensors>
+  <div class="container-chart">
+    <canvas id="myChart" width="700" height="250" #mychart></canvas>
+ </div>
+  <!-- <app-sensors [allGraphs]="allGraphs" ></app-sensors> -->
   <app-register-alert [allAlerts]='allAlerts' [time]='time'></app-register-alert>
 </main>
 <!-- <app-notification-alert classImg="img-alert" classNotification="alert"></app-notification-alert> -->
