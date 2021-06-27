@@ -15,48 +15,54 @@ export class AppComponent implements OnInit {
   lengthAlert!: number;
   allGraphs!: ChartALert[];
   chart!: Chart;
-  countLabels!: number;
-
-  constructor(
-    private fetchData: FetchDataService /* , private socket: SocketService */
-  ) {
-    this.allAlerts = [];
-    this.allGraphs = [];
-    this.countLabels = 0;
-  }
-
-  ngOnInit(): void {
-    // this.socket.callback.subscribe((data) => {
-    //   if (data) {
-    //     this.allAlerts = data.sensors;
-    //     this.time = data.timestamp;
-    //     this.lengthAlert = this.allAlerts.length;
-    //   }
-    // });
-
-    let count = 12;
-    const interval = setInterval(() => {
-      this.getData();
-      count--;
-      if (count <= 0) {
-        clearInterval(interval);
-      }
-    }, 5000);
-  }
-
-  getData() {
-    this.fetchData.getData().subscribe((data) => {
-      console.log(data);
-      this.allAlerts = data.data.sensors;
-      this.time = data.data.timestamp;
-      this.lengthAlert = this.allAlerts.length;
-      this.addData(data.data.graph);
-    });
-  }
-
   canvas: any;
   ctx: any;
   @ViewChild('mychart') mychart: any;
+  countLabels!: number;
+
+  constructor(
+    // private fetchData: FetchDataService,
+    private socket: SocketService
+  ) {
+    this.allAlerts = [];
+    this.allGraphs = [];
+    this.countLabels = 1;
+  }
+
+  ngOnInit(): void {
+    this.socket.dataCallback.subscribe((data) => {
+      if (data) {
+        this.allAlerts = data.sensors;
+        this.time = data.timestamp;
+        this.lengthAlert = this.allAlerts.length;
+      }
+    });
+
+    this.socket.graphCallback.subscribe((graph) => {
+      if (graph) {
+        this.addData(graph);
+      }
+    });
+
+    // let count = 12;
+    // const interval = setInterval(() => {
+    //   this.getData();
+    //   count--;
+    //   if (count <= 0) {
+    //     clearInterval(interval);
+    //   }
+    // }, 5000);
+  }
+
+  // getData() {
+  //   this.fetchData.getData().subscribe((data) => {
+  //     console.log(data);
+  //     this.allAlerts = data.data.sensors;
+  //     this.time = data.data.timestamp;
+  //     this.lengthAlert = this.allAlerts.length;
+  //     this.addData(data.data.graph);
+  //   });
+  // }
 
   addData(graph: ChartALert) {
     this.chart.data.labels?.push(this.countLabels++);
@@ -73,11 +79,11 @@ export class AppComponent implements OnInit {
     this.chart = new Chart(this.ctx, {
       type: 'line',
       data: {
-        labels: [],
+        labels: [0],
         datasets: [
           {
             label: 'Alertas',
-            data: [],
+            data: [0],
             fill: false,
             borderColor: 'rgb(75, 192, 192)',
           },

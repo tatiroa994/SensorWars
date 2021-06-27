@@ -11,13 +11,15 @@ import { EventEmitter } from '@angular/core';
 })
 export class SocketService extends Socket {
 
-  callback: EventEmitter<any> = new EventEmitter();
+  dataCallback: EventEmitter<any> = new EventEmitter();
+  graphCallback: EventEmitter<any> = new EventEmitter();
 
   constructor() {
     super({
-      url: 'http://localhost:3000',
+      url: 'http://18.117.255.122:3000',
     });
 
-    this.ioSocket.on('data', (data: any) => { this.callback.emit(data); });
+    this.ioSocket.on('data', (data: any) => { this.dataCallback.emit(data); });
+    this.ioSocket.on('graph', (data: any) => { this.graphCallback.emit(data); });
   }
 }

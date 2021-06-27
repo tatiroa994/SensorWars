@@ -3,7 +3,8 @@
     <span class="sensor">Sensor</span>
     <span class="wars">Wars</span>
   </div>
+  <button class="runGame" (click)="runGame()">EMPEZAR JUEGO</button>
   <div class="status-alert">
-    <img class="img-alert" [src]= "!statusColor ? '../../../assets/star-blue.svg':'../../../assets/star-red.svg'">
+    <img class="img-alert" [src]="!statusColor ? '../../../assets/star-blue.svg':'../../../assets/star-red.svg'">
   </div>
 </header>
