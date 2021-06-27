@@ -31,7 +31,10 @@ const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server, {
     cors: {
-        origins: ['http://localhost:4200']
+        origins: [
+            'https://sensor-wars.vercel.app/',
+            'http://localhost:4200'
+        ]
     }
 });
 const axios = require('axios');
@@ -65,9 +68,7 @@ app.post("/input", (req, res) => {
         socket.emit("data", alerts);
     }
 
-    if ((graph.dangerCount + graph.inactiveCount) > 0) {
-        socket.emit("graph", graph);
-    }
+    socket.emit("graph", graph);
 
     return res.json();
 });
@@ -84,13 +85,17 @@ app.get("/connect/:index", (req, res) => {
         headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Token': TOKEN }
     };
 
-    axios.get(`${URLBattles}battles/${index}`, options)
+    axios.get(`${URLBattles}battles/${index}/faucet`, options)
         .then((response) => {
-            res.json();
+            res.json({ status: true });
         }).catch((err) => {
-            console.error(err.message);
-            res.json();
+            res.json({ status: false, message: err.message });
         });
+});
+
+app.get("/info", (req, res) => {
+    const dataBefore = main.getBefore();
+    return res.json({ data: dataBefore });
 });
 
 server.listen(PORT, () => {
