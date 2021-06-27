@@ -26,14 +26,16 @@
  */
 
 const express = require("express");
+const bodyParser = require("body-parser");
 const app = express();
 
 const cors = require("cors");
 const main = require("./process");
 
-const PORT = process.env.PORT || 3030;
+const PORT = process.env.PORT || 3000;
 
-app.use(express.json());
+// app.use(express.json());
+app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cors());
 
 /**
