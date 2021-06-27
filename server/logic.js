@@ -59,9 +59,9 @@ io.on('connection', (s) => { console.log("Usuario conectado"); socket = s; });
  * Para procesar la info.
  */
 app.post("/input", (req, res) => {
-    const { data } = req.body;
+    const { payload } = req.body;
 
-    const { alerts, graph } = main.processMain(data);
+    const { alerts, graph } = main.processMain(payload);
     // const dataBefore = main.getBefore();
 
     if (alerts.sensors.length > 0) {
