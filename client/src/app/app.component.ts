@@ -18,7 +18,8 @@ export class AppComponent implements OnInit {
   chartInactive!: Chart;
   canvas: any;
   ctx: any;
-  countLabels!: number;
+  countLabels1!: number;
+  countLabels2!: number;
   @ViewChild('mychartDanger') mychartDanger: any;
   @ViewChild('mychartInactive') mychartInactive: any;
 
@@ -28,7 +29,8 @@ export class AppComponent implements OnInit {
   ) {
     this.allAlerts = [];
     this.allGraphs = [];
-    this.countLabels = 1;
+    this.countLabels1 = 1;
+    this.countLabels2 = 1;
   }
 
   ngOnInit(): void {
@@ -67,13 +69,13 @@ export class AppComponent implements OnInit {
   // }
 
   addData(graph: ChartALert) {
-    this.chartDanger.data.labels?.push(this.countLabels++);
+    this.chartDanger.data.labels?.push(this.countLabels1++);
     this.chartDanger.data.datasets?.forEach((dataset) => {
       dataset.data?.push(graph.dangerCount);
     });
     this.chartDanger.update();
 
-    this.chartInactive.data.labels?.push(this.countLabels++);
+    this.chartInactive.data.labels?.push(this.countLabels2++);
     this.chartInactive.data.datasets?.forEach((dataset) => {
       dataset.data?.push(graph.inactiveCount);
     });
