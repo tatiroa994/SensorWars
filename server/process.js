@@ -35,6 +35,7 @@ const processMain = (dataNow) => {
     const sensors = splitNow.map((value, i) => {
         let [ship, magto] = value.slice(1, value.length - 1).split("|");
         magto = Number(magto);
+        const sensor = i + 1;
 
         let proximity = { count: 1, type: '' };
         let alert = { type: '' };
@@ -80,7 +81,7 @@ const processMain = (dataNow) => {
             // console.log(`✅ Nave aliada`);
         }
 
-        const saveInfo = { ship, magto, proximity, alert };
+        const saveInfo = { ship, magto, proximity, alert, sensor };
         return saveInfo;
     });
 

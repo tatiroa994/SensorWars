@@ -1,12 +1,14 @@
 <app-header [statusColor]="lengthAlert"></app-header>
 <main class="main">
-  <div class="container-chart">
-    <canvas id="myChart" width="700" height="250" #mychart></canvas>
- </div>
+  <div class="container-charts">
+    <div class="container-chart">
+      <canvas id="myChartDanger" width="700" height="200" #mychartDanger></canvas>
+    </div>
+    <div class="container-chart">
+      <canvas id="myChartInactive" width="700" height="200" #mychartInactive></canvas>
+    </div>
+  </div>
   <!-- <app-sensors [allGraphs]="allGraphs" ></app-sensors> -->
   <app-register-alert [allAlerts]='allAlerts' [time]='time'></app-register-alert>
 </main>
 <!-- <app-notification-alert classImg="img-alert" classNotification="alert"></app-notification-alert> -->
-
-
- 

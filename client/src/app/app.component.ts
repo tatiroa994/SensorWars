@@ -14,11 +14,13 @@ export class AppComponent implements OnInit {
   time!: Date;
   lengthAlert!: number;
   allGraphs!: ChartALert[];
-  chart!: Chart;
+  chartDanger!: Chart;
+  chartInactive!: Chart;
   canvas: any;
   ctx: any;
-  @ViewChild('mychart') mychart: any;
   countLabels!: number;
+  @ViewChild('mychartDanger') mychartDanger: any;
+  @ViewChild('mychartInactive') mychartInactive: any;
 
   constructor(
     // private fetchData: FetchDataService,
@@ -65,18 +67,24 @@ export class AppComponent implements OnInit {
   // }
 
   addData(graph: ChartALert) {
-    this.chart.data.labels?.push(this.countLabels++);
-    this.chart.data.datasets?.forEach((dataset) => {
+    this.chartDanger.data.labels?.push(this.countLabels++);
+    this.chartDanger.data.datasets?.forEach((dataset) => {
       dataset.data?.push(graph.dangerCount);
     });
-    this.chart.update();
+    this.chartDanger.update();
+
+    this.chartInactive.data.labels?.push(this.countLabels++);
+    this.chartInactive.data.datasets?.forEach((dataset) => {
+      dataset.data?.push(graph.inactiveCount);
+    });
+    this.chartInactive.update();
   }
 
   ngAfterViewInit() {
-    this.canvas = this.mychart.nativeElement;
+    this.canvas = this.mychartDanger.nativeElement;
     this.ctx = this.canvas.getContext('2d');
 
-    this.chart = new Chart(this.ctx, {
+    this.chartDanger = new Chart(this.ctx, {
       type: 'line',
       data: {
         labels: [0],
@@ -85,7 +93,25 @@ export class AppComponent implements OnInit {
             label: 'Alertas',
             data: [0],
             fill: false,
-            borderColor: 'rgb(75, 192, 192)',
+            borderColor: 'rgb(255, 0, 0)',
+          },
+        ],
+      },
+    });
+
+    this.canvas = this.mychartInactive.nativeElement;
+    this.ctx = this.canvas.getContext('2d');
+
+    this.chartInactive = new Chart(this.ctx, {
+      type: 'line',
+      data: {
+        labels: [0],
+        datasets: [
+          {
+            label: 'Fallós',
+            data: [0],
+            fill: false,
+            borderColor: 'rgb(255, 255, 51)',
           },
         ],
       },

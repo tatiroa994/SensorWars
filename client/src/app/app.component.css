@@ -3,6 +3,7 @@
   flex-direction: row;
   justify-content: space-around;
   padding: 150px 14px 0 14px;
+  height: 100vh;
 }
 
 .container-chart {
@@ -10,8 +11,19 @@
   padding: 1rem;
   border-radius: 10px;
   width: 60%;
+  margin: 10px auto !important;
 }
 
 app-register-aler {
   width: 40%;
+}
+
+.container-charts {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+.container-charts div {
+  margin: 10px 0;
 }
