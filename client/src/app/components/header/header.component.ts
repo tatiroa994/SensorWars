@@ -6,9 +6,10 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  @Input() statusText!: string;
+  @Input() statusColor!: number;
+  
   constructor() {
-    this.statusText = 'Save';
+   
   }
 
   ngOnInit(): void {}

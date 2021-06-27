@@ -7,7 +7,6 @@
   position: fixed;
   top: 0;
   left: 0;
-
 }
 
 .sensor {
@@ -26,19 +25,11 @@
 }
 
 .status-alert {
-  border-radius: 100%;
   width: 100px;
   height: 100px;
-  background-color: var(--blue-alert);
-  position: relative;
 }
 
-.text-alert {
-  color: var(--color-white);
-  position: absolute;
-  top: 28px;
-  font-size: 2rem;
-  left: 16px;
+.img-alert {
+  width: 100px;
+  height: 100px;
 }
-
-

@@ -7,6 +7,8 @@ import { RegisterAlertComponent } from './components/register-alert/register-ale
 import { SensorsComponent } from './components/sensors/sensors.component';
 import { NotificationAlertComponent } from './components/notification-alert/notification-alert.component';
 import { HttpClientModule} from '@angular/common/http';
+import { FetchDataService } from './services/fetch-data.service';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +22,7 @@ import { HttpClientModule} from '@angular/common/http';
     BrowserModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [FetchDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

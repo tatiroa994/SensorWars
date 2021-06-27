@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class FetchDataService {
-  url = 'https://4a76e6c3f5e1.ngrok.io/info';
+  url = 'http://18.117.255.122:3000/info';
   constructor(private http: HttpClient) {}
 
   getData(): Observable<any> {

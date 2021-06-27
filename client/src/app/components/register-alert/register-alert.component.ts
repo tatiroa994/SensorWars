@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Alert, DataAlert } from 'src/app/models/alert.model';
-import { FetchDataService } from 'src/app/services/fetch-data.service';
+import { DataAlert } from 'src/app/models/alert.model';
 
 @Component({
   selector: 'app-register-alert',
@@ -10,28 +9,9 @@ import { FetchDataService } from 'src/app/services/fetch-data.service';
 export class RegisterAlertComponent implements OnInit {
   ship!: string;
   sensor!: number;
-  time!: Date;
-  allAlerts!: DataAlert[];
-  constructor(private fetchData: FetchDataService) {
-    this.allAlerts = [];
-  }
-
-  ngOnInit(): void {
-    this.getData();
-  }
-
-  getData() {
-    this.fetchData.getData().subscribe((data) => {
-      console.log(data.sensonrs);
-      
-      const dataSensors: DataAlert[] = data.sensors;
-      dataSensors.forEach((element) => {
-        if (element.alert.type === 2 && element.proximity.type === 'danger') {
-          this.allAlerts.push(element)
-        }
-      });
-      console.log(this.allAlerts);
-      
-    });
-  }
+  @Input() time!: Date;
+  @Input() allAlerts!: DataAlert[];
+  hiddenAlert!: string;
+  constructor() {}
+  ngOnInit(): void {}
 }

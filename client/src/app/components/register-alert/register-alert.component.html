@@ -1,8 +1,20 @@
 <article class="container-principal">
   <h3>REGISTRO DE ALERTAS</h3>
-  <div class="item-alert">
-    <span class="ship">{{ship}}</span>
-    <span class="sensor">Sensor No {{sensor}}</span>
-    <span class="time">{{time}}</span>
+  <div class="container-btn">
+    <button class="btn-options" (click)="hiddenAlert=''">Todas</button>
+    <button class="btn-options"(click)="hiddenAlert='danger'">Alertas</button>
+    <button class="btn-options" (click)="hiddenAlert='inactive'">Reparación</button>
+  </div>
+  <div *ngFor="let item of allAlerts; index as i">
+    <div *ngIf="item.alert.type === 2 && (!hiddenAlert || hiddenAlert === item.proximity.type)" class="item-alert {{ item.proximity.type }}">
+      <img class="icon-alert" [src]= "item.proximity.type=== 'danger'? '../../../assets/alert-red.png':'../../../assets/alert-yellow.png'">
+      <div class="text-alert">
+        <span class="type-alert">{{item.proximity.type=== 'danger'? 'Nave enemiga':'Requiere reparación'}}</span>
+        <span class="ship">{{ item.ship }}</span>
+        <span class="sensor">Sensor No {{ i + 1 }}</span>
+        <span class="time">{{ time }}</span>
+      </div>
+      
+    </div>
   </div>
 </article>

@@ -1,6 +1,9 @@
-<app-header></app-header>
+<app-header [statusColor]="lengthAlert"></app-header>
 <main class="main">
   <app-sensors></app-sensors>
-  <app-register-alert></app-register-alert>
+  <app-register-alert [allAlerts]='allAlerts' [time]='time'></app-register-alert>
 </main>
 <!-- <app-notification-alert classImg="img-alert" classNotification="alert"></app-notification-alert> -->
+
+
+ 
