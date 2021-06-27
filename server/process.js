@@ -27,7 +27,10 @@ const processMain = (dataNow) => {
         inactiveCount: 0
     };
 
-    const alerts = [];
+    const alerts = {
+        timestamp: info.timestamp,
+        sensors: []
+    };
 
     const sensors = splitNow.map((value, i) => {
         let [ship, magto] = value.slice(1, value.length - 1).split("|");
@@ -46,7 +49,7 @@ const processMain = (dataNow) => {
                 if (proximity.count >= 32) {
                     alert.type = 2;
                     ++graph.inactiveCount;
-                    alerts.push({ ship, magto, proximity, alert });
+                    alerts.sensors.push({ ship, magto, proximity, alert });
                 } else {
                     alert.type = 1;
                 }
@@ -63,7 +66,7 @@ const processMain = (dataNow) => {
                 if (proximity.count >= 30) {
                     alert.type = 2;
                     ++graph.dangerCount;
-                    alerts.push({ ship, magto, proximity, alert });
+                    alerts.sensors.push({ ship, magto, proximity, alert });
                 } else {
                     alert.type = 1;
                 }
@@ -83,15 +86,17 @@ const processMain = (dataNow) => {
 
     info.position = ++countData;
     info.sensors = sensors;
-    info.graph = graph;
 
     dataBefore = info;
-    if (countData == 60) {
-        dataBefore = undefined;
-        countData = 0;
-    }
 
-    return alerts;
+    /**
+     if (countData == 60) {
+         dataBefore = undefined;
+         countData = 0;
+     }
+     */
+
+    return { alerts, graph };
 };
 
 const getBefore = () => {

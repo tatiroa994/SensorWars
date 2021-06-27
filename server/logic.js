@@ -34,18 +34,21 @@ const io = require('socket.io')(server, {
         origins: ['http://localhost:4200']
     }
 });
+const axios = require('axios');
 
 const cors = require("cors");
 const main = require("./process");
 
 const PORT = process.env.PORT || 3000;
+const TOKEN = "b0dfcaf8-e35f-4283-af6c-53d2ca92ae3a";
+const URLBattles = "http://ec2-100-26-152-194.compute-1.amazonaws.com:3000/";
 
 // app.use(express.json());
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cors());
 
 let socket;
-io.on('connection', (s) => { socket = s; });
+io.on('connection', (s) => { console.log("Usuario conectado"); socket = s; });
 
 /**
  * Endpoint para la API
@@ -55,12 +58,18 @@ io.on('connection', (s) => { socket = s; });
 app.post("/input", (req, res) => {
     const { data } = req.body;
 
-    const info = main.processMain(data);
-    const dataBefore = main.getBefore();
+    const { alerts, graph } = main.processMain(data);
+    // const dataBefore = main.getBefore();
 
-    socket.emit("data", dataBefore);
+    if (alerts.sensors.length > 0) {
+        socket.emit("data", alerts);
+    }
 
-    return res.json({ info });
+    if ((graph.dangerCount + graph.inactiveCount) > 0) {
+        socket.emit("graph", graph);
+    }
+
+    return res.json();
 });
 
 /**
@@ -68,10 +77,20 @@ app.post("/input", (req, res) => {
  * 
  * Para recuperar la info.
  */
-app.get("/info", (req, res) => {
-    return res.json();
-    // const dataBefore = main.getBefore();
-    // return res.status(200).json({ data: dataBefore });
+app.get("/connect/:index", (req, res) => {
+    const { index } = req.params;
+
+    const options = {
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Token': TOKEN }
+    };
+
+    axios.get(`${URLBattles}battles/${index}`, options)
+        .then((response) => {
+            res.json();
+        }).catch((err) => {
+            console.error(err.message);
+            res.json();
+        });
 });
 
 server.listen(PORT, () => {
