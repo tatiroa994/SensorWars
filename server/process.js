@@ -27,6 +27,8 @@ const processMain = (dataNow) => {
         inactiveCount: 0
     };
 
+    const alerts = [];
+
     const sensors = splitNow.map((value, i) => {
         let [ship, magto] = value.slice(1, value.length - 1).split("|");
         magto = Number(magto);
@@ -44,6 +46,7 @@ const processMain = (dataNow) => {
                 if (proximity.count >= 32) {
                     alert.type = 2;
                     ++graph.inactiveCount;
+                    alerts.push({ ship, magto, proximity, alert });
                 } else {
                     alert.type = 1;
                 }
@@ -60,6 +63,7 @@ const processMain = (dataNow) => {
                 if (proximity.count >= 30) {
                     alert.type = 2;
                     ++graph.dangerCount;
+                    alerts.push({ ship, magto, proximity, alert });
                 } else {
                     alert.type = 1;
                 }
@@ -87,7 +91,7 @@ const processMain = (dataNow) => {
         countData = 0;
     }
 
-    return countData;
+    return alerts;
 };
 
 const getBefore = () => {

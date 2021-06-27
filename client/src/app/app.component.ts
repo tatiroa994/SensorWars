@@ -19,9 +19,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.socket.callback.subscribe((data) => {
-      this.allAlerts = data.sensors;
-      this.time = data.timestamp;
-      this.lengthAlert = this.allAlerts.length;
+      if (data) {
+        this.allAlerts = data.sensors;
+        this.time = data.timestamp;
+        this.lengthAlert = this.allAlerts.length;
+      }
     });
 
     // let count = 12;

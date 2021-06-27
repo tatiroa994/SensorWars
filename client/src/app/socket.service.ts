@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { EventEmitter } from '@angular/core';
 
+/**
+ * On Client <--- Server
+ * Emit Client ---> Server
+ */
 @Injectable({
   providedIn: 'root'
 })
