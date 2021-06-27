@@ -18,7 +18,7 @@ let countData = 0;
 let dataBefore = undefined;
 
 const processMain = (dataNow) => {
-    const splitNow = dataNow[countData].split(",");
+    const splitNow = dataNow.split(",");
 
     const info = { timestamp: splitNow.shift() };
 
@@ -87,6 +87,7 @@ const processMain = (dataNow) => {
     info.position = ++countData;
     info.sensors = sensors;
 
+    // info.graph = graph;
     dataBefore = info;
 
     /**
